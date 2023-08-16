@@ -1,1 +1,3 @@
-
+We finished the documentation of the shell
+and decided to read the code over many times to understand it and
+discuss it on day 4.
