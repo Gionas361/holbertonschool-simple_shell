@@ -1,5 +1,4 @@
 #include "main.h"
-#include <sys/wait.h>
 #define LSH_TOK_BUFSIZE 64
 #define LSH_TOK_DELIM " "
 

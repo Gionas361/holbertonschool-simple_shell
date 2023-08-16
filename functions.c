@@ -1,3 +1,5 @@
+#include "main.h"
+
 /*
   Function Declarations for builtin shell commands:
  */
