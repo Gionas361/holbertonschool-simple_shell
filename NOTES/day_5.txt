@@ -1,0 +1,5 @@
+    Jose Nieves made the base for the README.md and manpage.
+    The code was somewhat developed into a readble state and maybe
+workable for the checkers.
+
+

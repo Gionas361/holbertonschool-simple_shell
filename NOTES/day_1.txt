@@ -1,2 +1,2 @@
-Researched what to do and how we could posibly do it.
-We though of ways to read functions and maybe run them.
+    Researched what to do and how we could posibly do it.
+    We though of ways to read functions and maybe run them.

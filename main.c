@@ -96,6 +96,16 @@ int lsh_launch(char **args)
 
 int lsh_execute(char **args)
 {
+  noarg_t func[] = {
+		{"ls", ls_run},
+    {"pwd", pwd_run},
+  	{"cd", cd_run},
+		{"mkdir", mkdir_run},
+		{"echo", echo_run},
+		{"cat", cat_run},
+		{NULL, NULL}
+	};
+
   int i;
 
   if (args[0] == NULL) {
@@ -104,8 +114,8 @@ int lsh_execute(char **args)
   }
 
   for (i = 0; i < lsh_num_builtins(); i++) {
-    if (strcmp(args[0], builtin_str[i]) == 0) {
-      return (*builtin_func[i])(args);
+    if (strcmp(args[0], func[i].process) == 0) {
+      return (func[i].function)(args);
     }
   }
 
@@ -141,17 +151,8 @@ int main(int argc, char **argv)
 */
 char *function_call(char *string)
 {
-	noarg_t noarg[] = {
-		{"ls", ls_run},
-    {"pwd", pwd_run},
-		{NULL, NULL}
-	};
-
   hasarg_t hasarg[] = {
-  	{"cd", cd_run},
-		{"mkdir", mkdir_run},
-		{"echo", echo_run},
-		{"cat", cat_run},
+
     {NULL, NULL}
   };
 

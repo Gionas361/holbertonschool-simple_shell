@@ -12,24 +12,18 @@
 
 typedef struct noarg
 {
-	char *noarg;
-	char (*f);
+	char *process;
+	char (*function);
 } noarg_t;
-
-typedef struct hasarg
-{
-	char *hasarg;
-	char (*f)(char *condit);
-} hasarg_t;
 
 /** Funtion declarations */
 
-int ls_run();
-int pwd_run();
-int cd_run(char *condit);
-int cat_run(char *condit);
-int echo_run(char *condit);
-int mkdir_run(char *condit);
+int ls_run(char **condit);
+int pwd_run(char **condit);
+int cd_run(char **condit);
+int cat_run(char **condit);
+int echo_run(char **condit);
+int mkdir_run(char **condit);
 
 
 #endif
