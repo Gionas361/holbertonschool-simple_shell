@@ -2,7 +2,7 @@
 
 ## Description
 
-This will be updated as the project progresses.
+This project is called simple_shell. It's a shell program that reads input commands from the user, parses those commands, and executes appropriate functions based on the input.
 
 ## Flowchart
 
