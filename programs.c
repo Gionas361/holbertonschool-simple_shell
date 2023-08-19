@@ -1,5 +1,9 @@
 #include "main.h"
 
+/** ARRAYS */
+char *programs[] = {"cd", "help", "exit"};
+int (*functions[]) (char **) = {&cd_run, &help_run, &exit_run};
+
 /**
   * num_of_builtins - gets the number of builtin programs.
   * Return: size of them
@@ -43,8 +47,7 @@ int help_run(char **args)
   int i = 0;
   (void)args;
 
-  printf("TEST\n");
-  printf("Programs in the shell:");
+  printf("Programs in the shell:\n");
 
   /** prints the programms of the shell */
   for (; i < num_of_builtins() ; i++) {
@@ -64,4 +67,32 @@ int exit_run(char **args)
 {
   (void)args;
   return (0);
+}
+
+/**
+  * run_executer - run the shell commands or pass it to run_programm.
+  * @args: Arguments for the function to use.
+  * Return: 1 or 0
+  */
+int run_executer(char **args)
+{
+  int i;
+
+  /** if no function dont do anything */
+  if (args[0] == NULL)
+  {
+    return (1);
+  }
+
+  /** checks if the function is in the shell */
+  for (i = 0; i < num_of_builtins(); i++)
+  {
+    if (strcmp(args[0], programs[i]) == 0)
+    {
+      return (*functions[i])(args);
+    }
+  }
+
+  /** Else run it from the ones in pc with run_programm */
+  return (run_programm(args));
 }

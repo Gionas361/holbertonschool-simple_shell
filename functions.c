@@ -43,34 +43,6 @@ int run_programm(char **args)
 }
 
 /**
-  * run_executer - run the shell commands or pass it to run_programm.
-  * @args: Arguments for the function to use.
-  * Return: 1 or 0
-  */
-int run_executer(char **args)
-{
-  int i;
-
-  /** if no function dont do anything */
-  if (args[0] == NULL)
-  {
-    return (1);
-  }
-
-  /** checks if the function is in the shell */
-  for (i = 0; i < num_of_builtins(); i++)
-  {
-    if (strcmp(args[0], programs[i]) == 0)
-    {
-      return (*functions[i])(args);
-    }
-  }
-
-  /** Else run it from the ones in pc with run_programm */
-  return (run_programm(args));
-}
-
-/**
   * run_line_reader - read the input from user.
   * Return: the read input in an pointer.
   */
@@ -174,4 +146,26 @@ char **shell_line_splitter(char *line)
 
   tokens[position] = NULL;
   return (tokens);
+}
+
+
+/**
+  * shell_loop_input - gets the input and runs it with the other functions.
+  */
+void shell_loop_input()
+{
+  char *line;
+  char **args;
+  int status;
+
+  /** prints the $ and receives the input and runs command if any is provided */
+  do {
+    printf("$ ");
+    line = run_line_reader();
+    args = shell_line_splitter(line);
+    status = run_executer(args);
+
+    free(line);
+    free(args);
+  } while (status);
 }

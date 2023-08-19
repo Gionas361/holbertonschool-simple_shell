@@ -22,8 +22,4 @@ char **shell_line_splitter(char *line);
 void shell_loop_input();
 int main(int argc, char **argv);
 
-/** ARRAYS */
-char *programs[] = {"cd", "help", "exit"};
-int (*functions[]) (char **) = {&cd_run, &help_run, &exit_run};
-
 #endif
