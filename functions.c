@@ -1,56 +1,176 @@
 #include "main.h"
 
-int lsh_num_builtins() {
-  return sizeof(func) / sizeof(char *);
-}
-
-/*
-  Builtin function implementations.
-*/
-
 /**
-   @brief Bultin command: change directory.
-   @param args List of args.  args[0] is "cd".  args[1] is the directory.
-   @return Always returns 1, to continue executing.
- */
-int lsh_cd(char **args)
+  * run_programm - run a programm and close it when done.
+  * @args: Arguments for the function.
+  * Return: 1.
+  */
+int run_programm(char **args)
 {
-  if (args[1] == NULL) {
-    fprintf(stderr, "lsh: expected argument to \"cd\"\n");
-  } else {
-    if (chdir(args[1]) != 0) {
+  pid_t pid, wpid;
+  int status;
+
+  /** forks the parent */
+  pid = fork();
+
+  /** checks the fork worked */
+  if (pid == 0)
+  {
+    // Child process
+    if (execvp(args[0], args) == -1)
+    {
       perror("lsh");
     }
+    exit(EXIT_FAILURE);
   }
-  return 1;
+  else if (pid < 0)
+  {
+    // Error forking
+    perror("lsh");
+  }
+  /** if it did this runs */
+  else
+  {
+    // Parent process
+    do {
+      wpid = waitpid(pid, &status, WUNTRACED);
+    } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+  }
+
+  /** to keep the shell running */
+  return (1);
 }
 
 /**
-   @brief Builtin command: print help.
-   @param args List of args.  Not examined.
-   @return Always returns 1, to continue executing.
- */
-int lsh_help(char **args)
+  * run_executer - run the shell commands or pass it to run_programm.
+  * @args: Arguments for the function to use.
+  * Return: 1 or 0
+  */
+int run_executer(char **args)
 {
   int i;
-  printf("Stephen Brennan's LSH\n");
-  printf("Type program names and arguments, and hit enter.\n");
-  printf("The following are built in:\n");
 
-  for (i = 0; i < lsh_num_builtins(); i++) {
-    printf("  %s\n", builtin_str[i]);
+  /** if no function dont do anything */
+  if (args[0] == NULL)
+  {
+    return (1);
   }
 
-  printf("Use the man command for information on other programs.\n");
-  return 1;
+  /** checks if the function is in the shell */
+  for (i = 0; i < num_of_builtins(); i++)
+  {
+    if (strcmp(args[0], programs[i]) == 0)
+    {
+      return (*functions[i])(args);
+    }
+  }
+
+  /** Else run it from the ones in pc with run_programm */
+  return (run_programm(args));
 }
 
 /**
-   @brief Builtin command: exit.
-   @param args List of args.  Not examined.
-   @return Always returns 0, to terminate execution.
- */
-int lsh_exit(char **args)
+  * run_line_reader - read the input from user.
+  * Return: the read input in an pointer.
+  */
+char *run_line_reader()
 {
-  return 0;
+  int buffersize = READLINE_Megabite;
+  int position = 0;
+  char *buffer = malloc(sizeof(char) * buffersize);
+  int c;
+
+  /** if malloc fails, exit with error*/
+  if (!buffer)
+  {
+    fprintf(stderr, "lsh: allocation error\n");
+    exit(EXIT_FAILURE);
+  }
+
+  /** reads the input and puts it in a array */
+  while (1)
+  {
+    /** reads the current character*/
+    c = getchar();
+
+    /** if we hit the end of the file, 
+      * we change it for a null and return the array.
+      */
+    if (c == EOF || c == '\n')
+    {
+      buffer[position] = '\0';
+      return (buffer);
+    }
+    else
+    {
+      buffer[position] = c;
+    }
+
+    /** move to next char */
+    position++;
+
+    /** in case we dont have enough space,
+      * we give more space to the buffer.
+      */
+    if (position >= buffersize)
+    {
+      buffersize += READLINE_Megabite;
+      buffer = realloc(buffer, buffersize);
+
+      /** if it fails, we print error */
+      if (!buffer)
+      {
+        fprintf(stderr, "lsh: allocation error\n");
+        exit(EXIT_FAILURE);
+      }
+    }
+  }
+}
+
+/**
+  * shell_line_splitter - Split a line into tokens (very naively).
+  * @line: The line from run_line_reader.
+  * Return: the tokens
+  */
+char **shell_line_splitter(char *line)
+{
+  int buffersize = SHELL_Token_64;
+  int position = 0;
+  char **tokens = malloc(buffersize * sizeof(char*));
+  char *token;
+
+  /** if malloc fails print error */
+  if (!tokens)
+  {
+    fprintf(stderr, "lsh: allocation error\n");
+    exit(EXIT_FAILURE);
+  }
+
+  token = strtok(line, TOKEN_Delimitator);
+
+  /** creates an array with each token inside of it */
+  while (token != NULL)
+  {
+    tokens[position] = token;
+    position++;
+
+    /** allocats more space to tokens array if it doesnt have enough */
+    if (position >= buffersize)
+    {
+      buffersize += SHELL_Token_64;
+      tokens = realloc(tokens, buffersize * sizeof(char*));
+
+      /** if malloc fails print error */
+      if (!tokens)
+      {
+        fprintf(stderr, "lsh: allocation error\n");
+        exit(EXIT_FAILURE);
+      }
+    }
+
+    token = strtok(NULL, TOKEN_Delimitator);
+  }
+
+  tokens[position] = NULL;
+  return (tokens);
 }
