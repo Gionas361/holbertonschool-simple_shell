@@ -29,6 +29,11 @@ void shell_loop_input()
  */
 int main(int argc, char **argv)
 {
+  char **v = argv;
+  int c = argc;
+  (void)c;
+  (void)v;
+
   shell_loop_input();
   
   return (EXIT_SUCCESS);

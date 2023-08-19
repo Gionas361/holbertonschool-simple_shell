@@ -41,6 +41,7 @@ int cd_run(char **args)
 int help_run(char **args)
 {
   int i = 0;
+  (void)args;
 
   printf("TEST\n");
   printf("Programs in the shell:");
@@ -61,5 +62,6 @@ int help_run(char **args)
   */
 int exit_run(char **args)
 {
+  (void)args;
   return (0);
 }

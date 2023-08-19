@@ -9,6 +9,7 @@ int run_programm(char **args)
 {
   pid_t pid, wpid;
   int status;
+  (void)wpid;
 
   /** forks the parent */
   pid = fork();
@@ -16,7 +17,7 @@ int run_programm(char **args)
   /** checks the fork worked */
   if (pid == 0)
   {
-    // Child process
+    /** Child */
     if (execvp(args[0], args) == -1)
     {
       perror("lsh");
@@ -25,13 +26,13 @@ int run_programm(char **args)
   }
   else if (pid < 0)
   {
-    // Error forking
+    /** error in fork */
     perror("lsh");
   }
   /** if it did this runs */
   else
   {
-    // Parent process
+    /** Parent */
     do {
       wpid = waitpid(pid, &status, WUNTRACED);
     } while (!WIFEXITED(status) && !WIFSIGNALED(status));

@@ -10,11 +10,13 @@
 
 /** Structure declarations */
 
-typedef struct noarg
-{
-	char *process;
-	char (*function);
-} noarg_t;
+/**
+ * typedef struct noarg
+ * {
+ * 	char *process;
+ *	char (*function);
+ * } noarg_t;
+*/
 
 /** Funtion declarations */
 
