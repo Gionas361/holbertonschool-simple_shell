@@ -1,14 +1,15 @@
-.TH _SIMPLE_SHELL 3 simple_shell\-0.1
+.TH _SIMPLE_SHELL 1 simple_shell\-0.1
 .SH NAME
-simple_shell - formatted output
+simple_shell - receive input from user to perfrom basic system calls.
 .SH SYNOPSIS
 .B #include\ "main.h"
 
-.B int _printf(const char
-*format, ...);
+.B Interactive Mode: ./hsh
+
+.B Non-interactive Mode: [COMMAND]... | ./hsh
 .P
 .SH COMPILE
- gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c
+ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 .SH DESCRIPTION
 The function _printf() produces output to standard output in order of arguments given. Should it be give a format specifier, it will print as described below:
 .TP
@@ -31,6 +32,6 @@ prints "%"
 .SH BUGS
  No bugs found as of yet.
 .SH AUTHOR
- Hector J. Vazquez & Christian Rosario
+ Giovanni Carmona | Jose Nieves | Christian Rosario
 .SH COPYRIGHT
 .B GNU PRINTF Copyright, 2023

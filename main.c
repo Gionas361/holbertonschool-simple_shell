@@ -25,7 +25,7 @@ void shell_loop_input(void)
 	* main - runs the program lmao.
 	* @argc: number of arguments.
 	* @argv: array of arguments.
-	* Return: status of the code
+	* Return: status of the code.
 	*/
 int main(int argc, char **argv)
 {
