@@ -1,0 +1,36 @@
+.TH _SIMPLE_SHELL 3 simple_shell\-0.1
+.SH NAME
+simple_shell - formatted output
+.SH SYNOPSIS
+.B #include\ "main.h"
+
+.B int _printf(const char
+*format, ...);
+.P
+.SH COMPILE
+ gcc -Wall -Wextra -Werror -pedantic -std=gnu89 -Wno-format *.c
+.SH DESCRIPTION
+The function _printf() produces output to standard output in order of arguments given. Should it be give a format specifier, it will print as described below:
+.TP
+.B %d
+prints intergers
+.TP
+.B %i
+prints unsigned intergers
+.TP
+.B %c
+prints characters
+.TP
+.B %s
+prints a string
+.TP
+.B %
+prints "%"
+.SH RETURN
+ Returns number of times printed.
+.SH BUGS
+ No bugs found as of yet.
+.SH AUTHOR
+ Hector J. Vazquez & Christian Rosario
+.SH COPYRIGHT
+.B GNU PRINTF Copyright, 2023
