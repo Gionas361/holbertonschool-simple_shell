@@ -34,17 +34,16 @@ int main(int argc, char **argv)
 	(void)c;
 	(void)v;
 
-/**
-	if (argc > 0)
-	{
-		noninteractive();
-	}
-	else
+	/** determines if its in interactive mode or not */
+	if (isatty(0))
 	{
 		shell_loop_input();
 	}
-*/
-	shell_loop_input();
+	else
+	{
+		noninteractive();
+	}
+
 
 	return (EXIT_SUCCESS);
 }
