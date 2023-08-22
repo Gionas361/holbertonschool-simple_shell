@@ -30,11 +30,16 @@ void shell_loop_input(void)
 int main(int argc, char **argv)
 {
 	char **v = argv;
-	int c = argc;
-	(void)c;
 	(void)v;
 
-	shell_loop_input();
+	if (argc > 0)
+	{
+		noninteractive();
+	}
+	else
+	{
+		shell_loop_input();
+	}
 
 	return (EXIT_SUCCESS);
 }

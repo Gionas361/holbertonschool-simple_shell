@@ -23,5 +23,6 @@ char *run_line_reader();
 char **shell_line_splitter(char *line);
 void shell_loop_input(void);
 int main(int argc, char **argv);
+void noninteractive(void);
 
 #endif
