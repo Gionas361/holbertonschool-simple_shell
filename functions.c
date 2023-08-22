@@ -9,7 +9,21 @@ int run_programm(char **args)
 {
 	pid_t pid, wpid;
 	int status;
+	char *argbin[] = {"/", "b", "i", "n"};
+	char *args2;
+	int echocheck = 1, i;
+	
 	(void)wpid;
+
+	args2 = strtok(*args, "bin");
+
+	for (i = 0 ; args2[i] == argbin[i] ; i++)
+	{
+		if (i == 3)
+		{
+			echocheck = 0;
+		}
+	}
 
 	/** forks the parent */
 	pid = fork();
@@ -39,7 +53,7 @@ int run_programm(char **args)
 	}
 
 	/** to keep the shell running */
-	return (1);
+	return (echocheck);
 }
 
 /**
