@@ -6,32 +6,54 @@ simple_shell - receive input from user to perfrom basic system calls.
 
 .B Interactive Mode: ./hsh
 
-.B Non-interactive Mode: [COMMAND]... | ./hsh
+.B Non-Interactive Mode: [COMMAND]... | ./hsh
 .P
 .SH COMPILE
  gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 .SH DESCRIPTION
-The function _printf() produces output to standard output in order of arguments given. Should it be give a format specifier, it will print as described below:
+Our simple_shell program is capable of receiving input by the user at the command line. The program reads, splits, and executes line being provided.
+
+.SH OPTIONS
 .TP
-.B %d
-prints intergers
-.TP
-.B %i
-prints unsigned intergers
-.TP
-.B %c
-prints characters
-.TP
-.B %s
-prints a string
-.TP
-.B %
-prints "%"
+.B Receive system calls without any arguments, such as;
+
+Example - |  ls | pwd | help | cd 
+
+
+
+
+.B Receive system cals WITH arguments, such as;
+
+Example - | ls -la | cd .. | mkdir ...[DIRECTORY] 
+
+
+
+
+.B Handle PATHs for present files, such as;
+
+Example - | realpath ...[FILE] 
+
+
+
+
+.B 'exit' built-in operation available;
+
+Example - | exit
+
+
+
+
+.B 'env' built-in operation available;
+
+Example - | env
+
+
+
 .SH RETURN
- Returns number of times printed.
+ Returns commands being call by the user.
 .SH BUGS
- No bugs found as of yet.
+ The program currently goes on a infinite loop when initializing non-interactive.
 .SH AUTHOR
  Giovanni Carmona | Jose Nieves | Christian Rosario
 .SH COPYRIGHT
-.B GNU PRINTF Copyright, 2023
+.B GNU SIMPLE_SHELL Copyright, 2023
