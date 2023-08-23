@@ -6,7 +6,10 @@ This project is called simple_shell. It's a shell program that reads input comma
 
 ## Flowchart
 
-This will be updated as the project progresses.
+
+![Flowchart simple shell drawio](https://github.com/Gionas361/holbertonschool-simple_shell/assets/127802407/d8b499f6-fa09-4df4-b7c6-5ab9c51cf546)
+
+
 
 ## Usage
 
