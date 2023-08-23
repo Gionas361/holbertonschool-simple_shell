@@ -1,5 +1,8 @@
 #include "main.h"
 
+/**
+	* noninteractive - gets the input and runs it with the other functions.
+	*/
 void noninteractive(void)
 {
 	char *line;
