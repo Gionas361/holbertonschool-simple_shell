@@ -139,7 +139,7 @@ int aheago_run(char **args)
 	"⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⠄\n"
 	};
 	int i;
-	
+
 	(void)args;
 
 	for (i = 0 ; i <= 13 ; i++)
