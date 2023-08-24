@@ -1,6 +1,6 @@
 .TH _SIMPLE_SHELL 1 simple_shell\-0.1
 .SH NAME
-simple_shell - receive input from user to perfrom basic system calls.
+simple_shell - command language interpreter
 .SH SYNOPSIS
 .B #include\ "main.h"
 
@@ -11,7 +11,9 @@ simple_shell - receive input from user to perfrom basic system calls.
 .SH COMPILE
  gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 .SH DESCRIPTION
-Our simple_shell program is capable of receiving input by the user at the command line. The program reads, splits, and executes line being provided.
+Our simple_shell program is capable of receiving input by the user at the command line.
+The program reads the input, splits it into arguments, and executes the command being provided.
+
 
 .SH OPTIONS
 .TP
@@ -52,7 +54,7 @@ Example - | env
 .SH RETURN
  Returns commands being call by the user.
 .SH BUGS
- The program currently goes on a infinite loop when initializing non-interactive.
+ At the current moment, no present bugs.
 .SH AUTHOR
  Giovanni Carmona | Jose Nieves | Christian Rosario
 .SH COPYRIGHT
