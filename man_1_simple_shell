@@ -3,17 +3,23 @@
 simple_shell - command language interpreter
 .SH SYNOPSIS
 .B #include\ "main.h"
+./hsh
 
-.B Interactive Mode: ./hsh
-
-.B Non-Interactive Mode: [COMMAND]... | ./hsh
 .P
 .SH COMPILE
  gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
 .SH DESCRIPTION
 Our simple_shell program is capable of receiving input by the user at the command line.
-The program reads the input, splits it into arguments, and executes the command being provided.
+The program reads the input, splits it into arguments, and executes the command being provided. But in comparison to the regular shell, at a much more smaller scale, in terms of functions.
 
+.SH INVOCATION
+.B INTERACTIVE Mode - (./hsh)
+It allows you to continuosly enter commands unless specified to stop.
+
+.B Non-Interactive Mode - (echo '/bin/...[COMMAND]' | ./hsh)
+It allows to call a single specified command and close the program after execution.
+
+.B NOTE - The program is limited on the system calls that can be use, since its a simple replica of a terminal.
 
 .SH OPTIONS
 .TP
@@ -48,7 +54,6 @@ Example - | exit
 .B 'env' built-in operation available;
 
 Example - | env
-
 
 
 .SH RETURN
